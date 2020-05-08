@@ -5,6 +5,6 @@
 ![screenshot2](https://user-images.githubusercontent.com/23067500/72392972-4cf93580-36e6-11ea-8392-1b80d59b8276.png)
 ![screenshot3](https://user-images.githubusercontent.com/23067500/72392979-4ff42600-36e6-11ea-9cb9-22b8ba737de0.png)
 ### False Positives Dashboard
-![screenshot1](https://user-images.githubusercontent.com/23067500/78085351-8ea58e00-736f-11ea-8cfd-7fed4e29d6dc.png)
-![screenshot2](https://user-images.githubusercontent.com/23067500/78085354-92391500-736f-11ea-94ee-c22944ddda33.png)
-![screenshot3](https://user-images.githubusercontent.com/23067500/78085359-95cc9c00-736f-11ea-8cab-7dcf0bc52727.png)
+![screenshot1](https://user-images.githubusercontent.com/23067500/81446488-d6b68e00-912f-11ea-9f60-0821c2010e46.png)
+![screenshot2](https://user-images.githubusercontent.com/23067500/81446490-d918e800-912f-11ea-9223-a3cf7818cdcf.png)
+![screenshot3](https://user-images.githubusercontent.com/23067500/81446492-dae2ab80-912f-11ea-94a2-e99fd7423883.png)
