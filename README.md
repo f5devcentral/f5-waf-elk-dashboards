@@ -10,7 +10,7 @@ Therefore in order to get this all working you need:
 * NGINX App Protect
 ## Dashboards Installation
 In case if you have ELK stack up and running  import dashboards to kibana through UI or API calls.
-`
+```
 KIBANA_URL=https://your.kibana:5601
 jq -s . kibana/overview-dashboard.ndjson | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboards/import" \
@@ -23,12 +23,11 @@ curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboa
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
     | jq
-`
-
+```
 Otherwise you can deploy ELK stack  using docker-compose tool and then import dashboards.
-`
+```
 docker-compose -f docker-compose.yaml up
-`
+```
 ## NGINX App protect configuration
 NGINX App Protect doesn't require any special logging configuration besides logging destination should point to logstash instance. Take a look to official docs for [samples](https://docs.nginx.com/nginx-app-protect/admin-guide/#centos-7-4-installation)
 ## Screenshots
