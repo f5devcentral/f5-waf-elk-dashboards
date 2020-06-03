@@ -7,8 +7,8 @@ services:
       - ./logstash/conf.d:/etc/logstash/conf.d:ro
       - elk:/var/lib/elasticsearch
     ports:
-    - "9200:9200"
-    - "5601:5601"
-    - "5144:5144"
+      - 9200:9200
+      - 5601:5601
+      - 5144:5144
 volumes:
   elk:
