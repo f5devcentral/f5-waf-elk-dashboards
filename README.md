@@ -11,7 +11,7 @@ Therefore in order to get this all working you need:
 ## Dashboards Installation
 In case if you have ELK stack up and running  import dashboards to kibana through UI or API calls.
 `
-KIBANA_URL=https://kibana.f5-demo.com:443
+KIBANA_URL=https://your.kibana:5601
 jq -s . kibana/overview-dashboard.ndjson | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
