@@ -24,6 +24,7 @@ curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboa
     --header 'Content-Type: text/plain' -d @- \
     | jq
 `
+
 Otherwise you can deploy ELK stack  using docker-compose tool and then import dashboards.
 `
 docker-compose -f docker-compose.yaml up
