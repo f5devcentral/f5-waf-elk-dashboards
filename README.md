@@ -3,10 +3,10 @@ This is community supported repo providing ELK based dashboards for F5 WAFs.
 ## How it works?
 ELK stands for elasticsearch, logstash, and kibana. Logstash receives logs from F5 WAF normalizes them and stores in elasticsearch index. Kibana allows to visualize and navigate through logs using purpose built dashboards.
 ## Installation
-It is assumed you have ELK stack up and running. Use template from "logstash/conf.d" to create a new logstash pipeline to inject logs and store them in elasticsearch. Once logs are in index import files from "kibana" folder to create all necessary objects including index pattern, visualization and dashboards. 
+It is assumed you have ELK stack up and running. Use template from "logstash/conf.d" to create a new logstash pipeline to injest logs and store them in elasticsearch. Once logs are in index import files from "kibana" folder to create all necessary objects including index pattern, visualization and dashboards. 
 ## Quick Start
 ### Deploying an ELK Stack
-Clone this repo and use docker-compose to deploy an ELK stack.
+Use docker-compose to deploy an ELK stack.
 ```
 $ docker-compose -f docker-compose.yaml up
 ```
@@ -26,8 +26,8 @@ curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboa
     --header 'Content-Type: text/plain' -d @- \
     | jq
 ```
-### NGINX App protect configuration
-NGINX App Protect doesn't require any special logging configuration besides logging destination should point to an logstash instance. Take a look to official docs for [examples](https://docs.nginx.com/nginx-app-protect/admin-guide/#centos-7-4-installation)
+### NGINX App Protect Configuration
+NGINX App Protect doesn't require any special logging configuration besides logging destination should point to the logstash instance. Take a look to official docs for [examples](https://docs.nginx.com/nginx-app-protect/admin-guide/#centos-7-4-installation)
 ## Supported WAFs
 * NGINX App Protect
 ## Screenshots
