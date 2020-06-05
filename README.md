@@ -5,7 +5,7 @@ ELK stands for elasticsearch, logstash, and kibana. Logstash receives logs from 
 ## Installation
 It is assumed you have ELK stack up and running. Use template from "logstash/conf.d" to create a new logstash pipeline to injest logs and store them in elasticsearch. Once logs are in index import files from "kibana" folder to create all necessary objects including index pattern, visualization and dashboards. 
 ## Quick Start
-### Deploying an ELK Stack
+### Deploying ELK Stack
 Use docker-compose to deploy an ELK stack.
 ```
 $ docker-compose -f docker-compose.yaml up
