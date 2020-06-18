@@ -11,7 +11,7 @@ Use docker-compose to deploy an ELK stack.
 $ docker-compose -f docker-compose.yaml up
 ```
 ### Dashboards Installation
-Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or use API calls below. (Minimum supported Kibana version: 7.4.2)
+Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or use API calls below.
 ```
 KIBANA_URL=https://your.kibana:5601
 jq -s . kibana/overview-dashboard.ndjson | jq '{"objects": . }' | \
