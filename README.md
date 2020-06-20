@@ -2,26 +2,28 @@
 This is community supported repo providing ELK based dashboards for F5 WAFs.
 ## How it works?
 ELK stands for elasticsearch, logstash, and kibana. Logstash receives logs from F5 WAF normalizes them and stores in elasticsearch index. Kibana allows to visualize and navigate through logs using purpose built dashboards.
+## Requirements
+The provided Kibana dashboards require a minimum version of 7.4.2. If you are using the provided [docker-compose.yaml](docker-compose.yaml) file, this version requirement is met.
 ## Installation
-It is assumed you have ELK stack up and running. Use template from "logstash/conf.d" to create a new logstash pipeline to injest logs and store them in elasticsearch. Once logs are in index import files from "kibana" folder to create all necessary objects including index pattern, visualization and dashboards. 
+It is assumed you have ELK stack up and running. Use template from "logstash/conf.d" to create a new logstash pipeline to injest logs and store them in elasticsearch. Once logs are in index import files from "kibana" folder to create all necessary objects including index pattern, visualization and dashboards.
 ## Quick Start
 ### Deploying ELK Stack
-Use docker-compose to deploy an ELK stack.
+Use docker-compose to deploy your own ELK stack.
 ```
-$ docker-compose -f docker-compose.yaml up
+$ docker-compose -f docker-compose.yaml up -d
 ```
 ### Dashboards Installation
 Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or use API calls below.
 ```
 KIBANA_URL=https://your.kibana:5601
 jq -s . kibana/overview-dashboard.ndjson | jq '{"objects": . }' | \
-curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboards/import" \
+curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
     | jq
 
 jq -s . kibana/false-positives-dashboards.ndjson | jq '{"objects": . }' | \
-curl -k --location --request POST "$KIBANA_URL/_plugin/kibana/api/kibana/dashboards/import" \
+curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
     | jq
