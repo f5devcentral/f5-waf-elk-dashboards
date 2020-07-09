@@ -48,7 +48,7 @@ security log profile LOG_TO_ELK {
 ```
 ## Supported WAFs
 * NGINX App Protect
-* BIG-IP AWAF
+* BIG-IP ASM, Advanced WAF
 ## Screenshots
 ### Overview Dashboard
 ![screenshot1](https://user-images.githubusercontent.com/23067500/72393114-c7c25080-36e6-11ea-81c4-655f4c936476.png)
