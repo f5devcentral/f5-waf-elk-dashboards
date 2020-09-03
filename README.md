@@ -1,17 +1,29 @@
 # ELK based dashboards for F5 WAFs
 This is community supported repo providing ELK based dashboards for F5 WAFs.
-## How it works?
-ELK stands for elasticsearch, logstash, and kibana. Logstash receives logs from F5 WAF normalizes them and stores in elasticsearch index. Kibana allows to visualize and navigate through logs using purpose built dashboards.
+
+## How does it work?
+ELK stands for elasticsearch, logstash, and kibana. Logstash receives logs from the F5 WAF, normalizes them and stores them in the elasticsearch index. Kibana allows you to visualize and navigate through logs using purpose built dashboards.
+
 ## Requirements
 The provided Kibana dashboards require a minimum version of 7.4.2. If you are using the provided [docker-compose.yaml](docker-compose.yaml) file, this version requirement is met.
-## Installation
-It is assumed you have ELK stack up and running. Use template from "logstash/conf.d" to create a new logstash pipeline to injest logs and store them in elasticsearch. Once logs are in index import files from "kibana" folder to create all necessary objects including index pattern, visualization and dashboards.
+
+## Installation Overview
+It is assumed you will be running ELK using the Quick Start directions below. The template in "logstash/conf.d" will create a new logstash pipeline to ingest logs and store them in elasticsearch. If you use the supplied `docker-compose.yaml`, this template will be copied into the docker container instance for you. Once the WAF logs are being ingested into the index, you will need to import files from the [kibana](kibana/) folder to create all necessary objects including the index pattern, visualization and dashboards.
+
 ## Quick Start
 ### Deploying ELK Stack
 Use docker-compose to deploy your own ELK stack.
 ```
 $ docker-compose -f docker-compose.yaml up -d
 ```
+
+---
+**NOTE**
+
+The ELK stack docker container will likely exceed the default host's virtual memory system limits. Use [these directions](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/vm-max-map-count.html#vm-max-map-count) to increase this limit on the docker host machine. If you do not, the ELK container will continually restart itself and never fully initialize.
+
+---
+
 ### Dashboards Installation
 Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or use API calls below.
 ```
@@ -30,6 +42,7 @@ curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
 ```
 ### NGINX App Protect Configuration
 NGINX App Protect doesn't require any special logging configuration besides logging destination should point to the logstash instance. Take a look to official docs for [examples](https://docs.nginx.com/nginx-app-protect/admin-guide/#centos-7-4-installation)
+
 ### BIG-IP Configuration
 BIG-IP logging profile must be configured to use "splunk" logging format.
 ```
