@@ -43,6 +43,9 @@ curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
 ### NGINX App Protect Configuration
 NGINX App Protect doesn't require any special logging configuration besides logging destination should point to the logstash instance. Take a look to official docs for [examples](https://docs.nginx.com/nginx-app-protect/admin-guide/#centos-7-4-installation)
 
+**NOTE**
+The logstash listener in this solution is configured to listen for TCP syslog messages on a custom port (5144). If you have deployed NGINX App Protect on an SELinux protected system (such has Red Hat or CentOS), you will need to configure SELinux to allow remote syslog messages on a custom port. See the [configuration instructions](https://docs.nginx.com/nginx-app-protect/admin-guide/#syslog-to-custom-port) for an example of how to accomplish this.
+
 ### BIG-IP Configuration
 BIG-IP logging profile must be configured to use "splunk" logging format.
 ```
