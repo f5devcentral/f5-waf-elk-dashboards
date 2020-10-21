@@ -16,13 +16,14 @@ $ docker-compose -f docker-compose.yaml up -d
 Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or use API calls below.
 ```
 KIBANA_URL=https://your.kibana:5601
-jq -s . kibana/overview-dashboard.ndjson | jq '{"objects": . }' | \
+source helpers.sh
+cat kibana/overview-dashboard.code | code2ndjson | jq -s . | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
     | jq
 
-jq -s . kibana/false-positives-dashboards.ndjson | jq '{"objects": . }' | \
+cat kibana/false-positives-dashboards.code | code2ndjson | jq -s . | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
