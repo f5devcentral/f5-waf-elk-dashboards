@@ -17,13 +17,13 @@ Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or us
 ```
 KIBANA_URL=https://your.kibana:5601
 source helpers.sh
-cat kibana/overview-dashboard.code | code2ndjson | jq -s . | jq '{"objects": . }' | \
+cat kibana/overview-dashboard.json | code2ndjson | jq -s . | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
     | jq
 
-cat kibana/false-positives-dashboards.code | code2ndjson | jq -s . | jq '{"objects": . }' | \
+cat kibana/false-positives-dashboards.json | code2ndjson | jq -s . | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
     --header 'Content-Type: text/plain' -d @- \
