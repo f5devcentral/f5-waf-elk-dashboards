@@ -1,0 +1,46 @@
+on:
+  push:
+    tags:
+    - 'v*'
+
+name: Create release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Compress Dashboards
+        run: |
+          zip --junk-paths dashboards-${{ github.ref }} ./kibana/*.ndjson
+          tar -zcf dashboards-${{ github.ref }}.tar.gz ./kibana/*.ndjson
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Upload Zip Dashboards
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dashboards-${{ github.ref }}.zip
+          asset_name: dashboards-${{ github.ref }}.zip
+          asset_content_type: application/zip
+      - name: Upload tar.gz Dashboards
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dashboards-${{ github.ref }}.tar.gz
+          asset_name: dashboards-${{ github.ref }}.tar.gz
+          asset_content_type: application/tar+gzip
