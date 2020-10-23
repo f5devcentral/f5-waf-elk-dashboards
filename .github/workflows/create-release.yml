@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Set vars
         id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: |
+          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        echo ::set-output name=repo-name::${GITHUB_REPOSITORY#*/}
       - name: Compress Dashboards
         run: |
           zip --junk-paths dashboards-${{ steps.vars.outputs.tag }}.zip ./kibana/*.ndjson
@@ -46,4 +48,22 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dashboards-${{ steps.vars.outputs.tag }}.tar.gz
           asset_name: dashboards-${{ steps.vars.outputs.tag }}.tar.gz
+          asset_content_type: application/tar+gzip
+      - name: Upload Zip Source Code
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ steps.vars.outputs.repo-name }}-${{ steps.vars.outputs.tag }}.zip
+          asset_name: ${{ steps.vars.outputs.repo-name }}-${{ steps.vars.outputs.tag }}.zip
+          asset_content_type: application/zip
+      - name: Upload tar.gz Source Code
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ steps.vars.outputs.tag }}-${{ steps.vars.outputs.tag }}.tar.gz
+          asset_name: ${{ steps.vars.outputs.tag }}-${{ steps.vars.outputs.tag }}.tar.gz
           asset_content_type: application/tar+gzip
