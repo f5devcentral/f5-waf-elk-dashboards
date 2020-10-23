@@ -68,6 +68,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ steps.vars.outputs.tag }}-${{ steps.vars.outputs.tag }}.tar.gz
+          asset_path: ./${{ steps.vars.outputs.repo-name }}-${{ steps.vars.outputs.tag }}.tar.gz
           asset_name: Source Code (tar.gz)
           asset_content_type: application/tar+gzip
