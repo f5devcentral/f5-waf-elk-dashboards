@@ -16,7 +16,7 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-        echo ::set-output name=repo-name::${GITHUB_REPOSITORY#*/}
+          echo ::set-output name=repo-name::${GITHUB_REPOSITORY#*/}
       - name: Compress Dashboards
         run: |
           zip --junk-paths dashboards-${{ steps.vars.outputs.tag }}.zip ./kibana/*.ndjson
