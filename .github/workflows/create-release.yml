@@ -17,7 +17,7 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: Compress Dashboards
         run: |
-          zip --junk-paths dashboards-${{ steps.vars.outputs.tag }} ./kibana/*.ndjson
+          zip --junk-paths dashboards-${{ steps.vars.outputs.tag }}.zip ./kibana/*.ndjson
           tar -zcf dashboards-${{ steps.vars.outputs.tag }}.tar.gz ./kibana/*.ndjson
       - name: Create Release
         id: create_release
