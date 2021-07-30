@@ -3122,7 +3122,7 @@
         "version": true,
         "query": {
           "language": "kuery",
-          "query": "ASM*"
+          "query": "support_id : * "
         },
         "filter": [],
         "indexRefName": "kibanaSavedObjectMeta.searchSourceJSON.index"
