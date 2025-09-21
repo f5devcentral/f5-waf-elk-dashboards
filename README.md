@@ -27,7 +27,7 @@ The ELK stack docker container will likely exceed the default host's virtual mem
 ### Dashboards Installation
 Import dashboards to kibana through UI (Kibana->Management->Saved Objects) or use API calls below.
 ```
-KIBANA_URL=https://your.kibana:5601
+KIBANA_URL=http://your.kibana:5601
 jq -s . kibana/overview-dashboard.ndjson | jq '{"objects": . }' | \
 curl -k --location --request POST "$KIBANA_URL/api/kibana/dashboards/import" \
     --header 'kbn-xsrf: true' \
